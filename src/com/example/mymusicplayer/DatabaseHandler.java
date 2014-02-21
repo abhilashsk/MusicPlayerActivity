@@ -27,7 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String KEY_ID = "_id";
 	public static final String KEY_TITLE = "songTitle";
 	public static final String KEY_PATH = "path";
-
+	public static final String ROWID = "num";
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		Log.d("abcd","constructed");
@@ -39,8 +39,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_SONGS_TABLE = "CREATE TABLE " + TABLE_SONGS + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
-				+ KEY_PATH + " TEXT" + ")";
+				+ KEY_ID + " INTEGER primary key," + KEY_TITLE + " TEXT,"
+				+ KEY_PATH + " TEXT"+ ")";
+		//" INTEGER PRIMARY KEY,"
 		db.execSQL(CREATE_SONGS_TABLE);
 		System.out.println("created");
 	}
@@ -79,11 +80,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		Cursor cursor = db.query(TABLE_SONGS, new String[] { KEY_ID ,
-				KEY_TITLE, KEY_PATH }, KEY_ID + "=?",
-				new String[] { String.valueOf(id) }, null, null, null, null);
+				KEY_TITLE, KEY_PATH },KEY_ID + "=?" ,
+				new String[] { String.valueOf(id) }, null, null, KEY_TITLE, null);
 		if (cursor != null)
 			cursor.moveToFirst();
-
+//KEY_ID + "=?"
 		SongList songList = new SongList(Integer.parseInt(cursor.getString(0)),
 				cursor.getString(1), cursor.getString(2));
 		// return contact
@@ -94,20 +95,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public List<SongList> getAllSongs() {
 		List<SongList> songList = new ArrayList<SongList>();
 		// Select All Query
-		String selectQuery = "SELECT  * FROM " + TABLE_SONGS;
-
+		//String selectQuery = "SELECT  * FROM " + TABLE_SONGS;
+          String selectQuery = "SELECT  * FROM " + TABLE_SONGS +" ORDER BY "+ KEY_TITLE +" COLLATE NOCASE ASC;" ;
+                   
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
-
+        int i = 0;
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
 				SongList song = new SongList();
-				song.setID(Integer.parseInt(cursor.getString(0)));
+				song.setID(i);
+				//Integer.parseInt(cursor.getString(0))
 				song.setTitle(cursor.getString(1));
+				System.out.println(i + " " + cursor.getString(1));
 				song.setPath(cursor.getString(2));
 				// Adding contact to list
 				songList.add(song);
+				i++;
 			} while (cursor.moveToNext());
 		}
 
@@ -123,7 +128,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		                   null, // where clause parameters
 		                   null, // group by
 		                   null, // having
-		                   null, // orderby
+		                   KEY_TITLE +" COLLATE NOCASE ASC;", // orderby
 		                   null);// limit
 		    
 		          return mCursor;

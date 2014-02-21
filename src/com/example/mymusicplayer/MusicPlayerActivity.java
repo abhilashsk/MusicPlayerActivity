@@ -1,7 +1,6 @@
 package com.example.mymusicplayer;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Random;
 
 import android.media.MediaMetadataRetriever;
@@ -15,7 +14,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -52,7 +50,6 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
  private int currentSongIndex = 0;
  private boolean isShuffle = false;
  private boolean isRepeat = false;
- private  List<SongList> songsList;
  private DatabaseHandler db ;
 
  
@@ -295,7 +292,6 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
      * Function to play a song
      * @param songIndex - index of song
      * */
-	@SuppressWarnings("unused")
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 	public void playSong(int songIndex){
 		// play song
@@ -305,16 +301,18 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 		try {
 			mp.reset();
 			//mp.setDataSource(songsList.get(songIndex).get("songPath"));
-			System.out.println(db.getsong(songIndex).getPath());
-			mp.setDataSource(db.getsong(songIndex).getPath());
+			
+			//mp.setDataSource(db.getsong(songIndex).getPath());
+			System.out.println(db.getAllSongs().get(songIndex));
+			mp.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			mp.prepare();
 			mp.start();
 			
 			//Displaying Song Title
-			String songTitle = (db.getsong(songIndex).getTitle());
+			String songTitle = (db.getAllSongs().get(songIndex).getTitle());
 			System.out.println(" " + songTitle);
 			MediaMetadataRetriever retriever = new MediaMetadataRetriever(); 
-			retriever.setDataSource(db.getsong(songIndex).getPath());
+			retriever.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			try{data = retriever.getEmbeddedPicture();
 			 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 			 albumArt.setImageBitmap(bitmap);

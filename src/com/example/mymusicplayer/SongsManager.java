@@ -1,9 +1,6 @@
 package com.example.mymusicplayer;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -55,7 +52,7 @@ public class SongsManager extends Activity {
 	     Log.d("Name: ", log);
 	     }
 	     Intent in1= new Intent(this,PlaylistActivity.class);
-	     in1.putExtra("updated","updated");
+	     startActivity(in1);
          finish();
 	}
 	private void scanDirectory(File directory){
