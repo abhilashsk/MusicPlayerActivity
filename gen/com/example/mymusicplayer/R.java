@@ -66,10 +66,11 @@ public final class R {
         public static final int SongProgress=0x7f08000b;
         public static final int SongThumb=0x7f080003;
         public static final int SongTitle=0x7f080001;
-        public static final int action_create=0x7f080014;
-        public static final int action_refresh=0x7f080013;
-        public static final int action_settings=0x7f080012;
+        public static final int action_create=0x7f080015;
+        public static final int action_refresh=0x7f080014;
+        public static final int action_settings=0x7f080013;
         public static final int albumArt=0x7f080004;
+        public static final int artist=0x7f080012;
         public static final int bBackward=0x7f080007;
         public static final int bForward=0x7f080009;
         public static final int bNext=0x7f08000a;

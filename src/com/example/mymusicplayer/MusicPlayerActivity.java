@@ -71,6 +71,7 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 	        songCurrentDuration = (TextView) findViewById(R.id.currentDuration);
 	        songTotalDuration = (TextView) findViewById(R.id.totalDuration);
 	        albumArt = (ImageView) findViewById(R.id.albumArt);
+	        
 	        //media player
 	        mp = new MediaPlayer();
 	       //songManager = new SongsManager();
@@ -84,7 +85,7 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 	        //setting initial values for song title and album art
 	        songTitleLabel.setText("Song Title");
 	        albumArt.setImageResource(R.drawable.adele);
-	        albumArt.setScaleType(ScaleType.FIT_XY);
+	        albumArt.setScaleType(ScaleType.FIT_CENTER);
 	        /**
 	         * Button Click event for Play list click event
 	         * Launches list activity which displays list of songs
@@ -300,23 +301,18 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 		Bitmap bitmap;
 		try {
 			mp.reset();
-			//mp.setDataSource(songsList.get(songIndex).get("songPath"));
-			
-			//mp.setDataSource(db.getsong(songIndex).getPath());
-			System.out.println(db.getAllSongs().get(songIndex));
 			mp.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			mp.prepare();
 			mp.start();
 			
 			//Displaying Song Title
 			String songTitle = (db.getAllSongs().get(songIndex).getTitle());
-			System.out.println(" " + songTitle);
 			MediaMetadataRetriever retriever = new MediaMetadataRetriever(); 
 			retriever.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			try{data = retriever.getEmbeddedPicture();
 			 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 			 albumArt.setImageBitmap(bitmap);
-			 albumArt.setScaleType(ScaleType.FIT_XY);
+			 albumArt.setScaleType(ScaleType.FIT_CENTER);
 			 isArt = true;
 			 }
 			catch (NullPointerException e) {
@@ -325,10 +321,11 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 				e.printStackTrace();
 			}
 			finally{
-				songTitleLabel.setText(" " + songTitle);
+				songTitleLabel.setText(songTitle);
+				
 				if(!isArt){
 				albumArt.setImageResource(R.drawable.adele);
-				albumArt.setScaleType(ScaleType.FIT_XY);
+				albumArt.setScaleType(ScaleType.FIT_CENTER);
 				}
 			}
 			// Changing Button image to pause

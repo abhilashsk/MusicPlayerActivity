@@ -27,7 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String KEY_ID = "_id";
 	public static final String KEY_TITLE = "songTitle";
 	public static final String KEY_PATH = "path";
-	public static final String ROWID = "num";
+	public static final String KEY_ARTIST = "artistName";
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		Log.d("abcd","constructed");
@@ -40,7 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_SONGS_TABLE = "CREATE TABLE " + TABLE_SONGS + "("
 				+ KEY_ID + " INTEGER primary key," + KEY_TITLE + " TEXT,"
-				+ KEY_PATH + " TEXT"+ ")";
+				+ KEY_PATH + " TEXT,"+ KEY_ARTIST + " TEXT" + ")";
 		//" INTEGER PRIMARY KEY,"
 		db.execSQL(CREATE_SONGS_TABLE);
 		System.out.println("created");
@@ -66,7 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_TITLE, songList.getTitle()); // Contact Name
 		values.put(KEY_PATH, songList.getPath()); // Contact Phone
-
+        values.put(KEY_ARTIST, songList.getArtist());
 		// Inserting Row
 		db.insert(TABLE_SONGS, null, values);
 		db.close(); // Closing database connection
@@ -80,13 +80,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		Cursor cursor = db.query(TABLE_SONGS, new String[] { KEY_ID ,
-				KEY_TITLE, KEY_PATH },KEY_ID + "=?" ,
+				KEY_TITLE, KEY_PATH , KEY_ARTIST},KEY_ID + "=?" ,
 				new String[] { String.valueOf(id) }, null, null, KEY_TITLE, null);
 		if (cursor != null)
 			cursor.moveToFirst();
 //KEY_ID + "=?"
 		SongList songList = new SongList(Integer.parseInt(cursor.getString(0)),
-				cursor.getString(1), cursor.getString(2));
+				cursor.getString(1), cursor.getString(2),cursor.getString(3));
 		// return contact
 		return songList;
 	}
@@ -110,6 +110,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				song.setTitle(cursor.getString(1));
 				System.out.println(i + " " + cursor.getString(1));
 				song.setPath(cursor.getString(2));
+				song.setArtist(cursor.getString(3));
 				// Adding contact to list
 				songList.add(song);
 				i++;
@@ -123,7 +124,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		           SQLiteDatabase db = this.getReadableDatabase();
 		            Cursor mCursor = db.query(true, // isdistinct
 		                   TABLE_SONGS, // table name
-		                   new String[] { KEY_ID ,KEY_TITLE },// select clause
+		                   new String[] { KEY_ID ,KEY_TITLE,KEY_ARTIST},// select clause
 		                   null, // where cluase
 		                   null, // where clause parameters
 		                   null, // group by

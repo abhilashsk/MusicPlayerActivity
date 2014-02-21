@@ -1,7 +1,7 @@
 package com.example.mymusicplayer;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.MenuItem;
@@ -9,11 +9,14 @@ import android.view.View;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -31,12 +34,15 @@ public class PlaylistActivity extends ListActivity {
 	    songList = db.getAllSongs();
 	    db.close();
 	   
-	    SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
+	   /* SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, 
 	            R.layout.playlist_item, 
 	            db.getValues(), 
 	            new String[] {DatabaseHandler.KEY_TITLE }, 
-	            new int[] { R.id.songTitle },0);
-	   
+	            new int[] { R.id.songTitle },0);*/
+	   CustomAdapter adapter = new CustomAdapter(this,R.layout.playlist_item,
+			   db.getValues(),
+			   new String[] {DatabaseHandler.KEY_TITLE},
+			   new int[] {R.id.songTitle},0);
 	    setListAdapter(adapter);
 	    //selecting Single ListView item
 	    ListView lv = getListView();
@@ -113,4 +119,9 @@ public class PlaylistActivity extends ListActivity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+		
+		
+		
 }
+

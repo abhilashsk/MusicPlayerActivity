@@ -10,9 +10,18 @@
         android:id="@+id/songTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:padding="10dp"
-        android:textColor="#ff0000"/>
+        android:textSize="15sp"
+        android:padding="5dp"
+        android:textColor="#ffffff"/>
+     <TextView android:id="@+id/artist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#ffeeee"
+        android:padding="5dp"
+        />
+   
+   
     
 
 </LinearLayout>
