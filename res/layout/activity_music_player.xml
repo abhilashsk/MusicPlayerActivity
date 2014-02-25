@@ -29,8 +29,8 @@
           android:layout_weight="1"
           android:paddingLeft="5dp"
           
-          android:textColor="#04b3d2"
-          android:textSize="20sp"
+          android:textColor="#ffeedd"
+          android:textSize="18sp"
           android:textStyle="bold" />
       <!-- Playlist Button -->
       <ImageButton
@@ -48,7 +48,8 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:gravity="center"
-        android:layout_below="@id/player_header_bg">
+        android:layout_below="@id/player_header_bg"
+        >
       <ImageView
           android:layout_width="match_parent"
           android:layout_height="match_parent"

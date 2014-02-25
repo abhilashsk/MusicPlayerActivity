@@ -84,7 +84,7 @@ private void addSongToDB(File song)
 			}
 			finally{
 			String songTitle =retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
-			String artistName = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUMARTIST);
+			String artistName = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
 			if (songTitle==null)
 			{
 				songTitle=song.getName().substring(0, song.getName().length()-4);

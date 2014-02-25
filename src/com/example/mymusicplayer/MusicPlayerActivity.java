@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -51,8 +53,8 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
  private boolean isShuffle = false;
  private boolean isRepeat = false;
  private DatabaseHandler db ;
-
- 
+ Animation FadeIn;
+ Animation FadeOut;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -71,6 +73,8 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 	        songCurrentDuration = (TextView) findViewById(R.id.currentDuration);
 	        songTotalDuration = (TextView) findViewById(R.id.totalDuration);
 	        albumArt = (ImageView) findViewById(R.id.albumArt);
+	        FadeIn =  AnimationUtils.loadAnimation(getApplicationContext(),
+	                R.anim.fadein); 
 	        
 	        //media player
 	        mp = new MediaPlayer();
@@ -261,12 +265,12 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 					currentSongIndex = rand.nextInt((db.getSongsCount()-1)- 0 + 1)+0;
 					playSong(currentSongIndex);}
 				else{
-				if(currentSongIndex<(db.getSongsCount())-1){
-					playSong(currentSongIndex + 1);
-					currentSongIndex = currentSongIndex + 1;
+				if(currentSongIndex>0){
+					playSong(currentSongIndex - 1);
+					currentSongIndex = currentSongIndex - 1;
 				}else {
-					playSong(0);
-					currentSongIndex=(0);
+					playSong(db.getSongsCount());
+					currentSongIndex=(db.getSongsCount());
 				}
 				}
  
@@ -304,15 +308,19 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 			mp.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			mp.prepare();
 			mp.start();
-			
 			//Displaying Song Title
 			String songTitle = (db.getAllSongs().get(songIndex).getTitle());
 			MediaMetadataRetriever retriever = new MediaMetadataRetriever(); 
 			retriever.setDataSource(db.getAllSongs().get(songIndex).getPath());
 			try{data = retriever.getEmbeddedPicture();
 			 bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+			 
 			 albumArt.setImageBitmap(bitmap);
 			 albumArt.setScaleType(ScaleType.FIT_CENTER);
+			 
+			 albumArt.startAnimation(FadeIn);
+			 
+			 
 			 isArt = true;
 			 }
 			catch (NullPointerException e) {
@@ -324,8 +332,12 @@ public class MusicPlayerActivity extends Activity implements OnCompletionListene
 				songTitleLabel.setText(songTitle);
 				
 				if(!isArt){
+			    
 				albumArt.setImageResource(R.drawable.adele);
 				albumArt.setScaleType(ScaleType.FIT_CENTER);
+			
+				albumArt.startAnimation(FadeIn);
+				
 				}
 			}
 			// Changing Button image to pause

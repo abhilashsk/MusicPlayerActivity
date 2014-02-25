@@ -6,9 +6,10 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.TextView;
 
-public class CustomAdapter extends SimpleCursorAdapter{
+public class CustomAdapter extends SimpleCursorAdapter {
 	private Context context;
 	private int layout;
+    private static String sections = "abcdefghilmnopqrstuvz";
 	public CustomAdapter(Context context, int layout, Cursor c, String[] from,
 			int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
@@ -36,8 +37,6 @@ public class CustomAdapter extends SimpleCursorAdapter{
 	        	artistNameLabel.setText("Unknown Artist");
 	        }
 	    }
-
-
 	
 	
 }
