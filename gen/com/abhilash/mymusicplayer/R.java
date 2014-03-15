@@ -71,11 +71,11 @@ public final class R {
         public static final int SongProgress=0x7f09000b;
         public static final int SongThumb=0x7f090003;
         public static final int SongTitle=0x7f090001;
-        public static final int action_create=0x7f090015;
-        public static final int action_refresh=0x7f090014;
-        public static final int action_settings=0x7f090013;
+        public static final int action_create=0x7f090016;
+        public static final int action_refresh=0x7f090015;
+        public static final int action_settings=0x7f090014;
         public static final int albumArt=0x7f090004;
-        public static final int artist=0x7f090012;
+        public static final int artist=0x7f090013;
         public static final int bBackward=0x7f090007;
         public static final int bForward=0x7f090009;
         public static final int bNext=0x7f09000a;
@@ -85,9 +85,10 @@ public final class R {
         public static final int bRepeat=0x7f09000f;
         public static final int bShuffle=0x7f090010;
         public static final int currentDuration=0x7f09000d;
+        public static final int mobFoxView=0x7f090011;
         public static final int player_footer_bg=0x7f090005;
         public static final int player_header_bg=0x7f090000;
-        public static final int songTitle=0x7f090011;
+        public static final int songTitle=0x7f090012;
         public static final int timerDisplay=0x7f09000c;
         public static final int totalDuration=0x7f09000e;
     }

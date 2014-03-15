@@ -179,4 +179,10 @@
              android:src="@drawable/img_btn_shuffle" />
 
      </LinearLayout>
+    <com.mobfox.sdk.MobFoxView
+android:id="@+id/mobFoxView"
+android:layout_width="fill_parent"
+android:layout_height="50dp"
+publisherId="8a40e17ba1d28d74338aa1ad3325fb5b"
+/>
 </RelativeLayout>
