@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
 
 public final class R {
     public static final class anim {

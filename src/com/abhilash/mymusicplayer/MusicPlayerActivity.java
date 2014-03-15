@@ -1,7 +1,9 @@
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
 
 import java.io.IOException;
 import java.util.Random;
+
+import com.abhilash.mymusicplayer.R;
 
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;

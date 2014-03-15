@@ -1,4 +1,4 @@
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +108,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				song.setID(i);
 				//Integer.parseInt(cursor.getString(0))
 				song.setTitle(cursor.getString(1));
-				System.out.println(i + " " + cursor.getString(1));
 				song.setPath(cursor.getString(2));
 				song.setArtist(cursor.getString(3));
 				// Adding contact to list

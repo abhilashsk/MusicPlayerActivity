@@ -1,4 +1,6 @@
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
+
+import com.abhilash.mymusicplayer.R;
 
 import android.content.Context;
 import android.database.Cursor;

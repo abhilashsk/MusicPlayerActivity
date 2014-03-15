@@ -1,6 +1,8 @@
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
 
 import java.util.List;
+
+import com.abhilash.mymusicplayer.R;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;

@@ -1,4 +1,4 @@
-package com.example.mymusicplayer;
+package com.abhilash.mymusicplayer;
 
 public class SongList {
 //private variables
